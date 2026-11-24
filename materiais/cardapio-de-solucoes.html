@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cardápio de soluções · Ciência de Dados na Saúde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#fff;--fg:#1A1718;--muted:#6A6365;--line:#E6DEDE;--card:#F6F2F2;--red:#D11615;--font:"Poppins",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme: dark){:root{--bg:#161415;--fg:#F2EDED;--muted:#A79FA1;--line:#3A3537;--card:#221F20;--red:#FF6B6A;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:28px 16px 56px}
+.topo{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:16px;border-bottom:2px solid var(--red)}
+.logo{height:52px;padding:0 10px;background:#fff;border-radius:8px;display:flex;align-items:center;gap:8px;border:1px solid var(--line)}
+.logo img{width:64px}.logo img.dotl{width:38px}.logo .sep{width:1px;height:32px;background:#E6DEDE}
+a.voltar{font-size:13px;font-weight:600;color:var(--fg)}
+.eyebrow{margin-top:24px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+h1{font-size:clamp(26px,4.4vw,34px);font-weight:800;margin:4px 0 8px;line-height:1.2}
+h1 em{font-style:normal;color:var(--red)}
+h2{font-size:20px;font-weight:700;margin:36px 0 12px}
+.lede{color:var(--muted);max-width:70ch}
+.grade{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
+@media (max-width:700px){.grade{grid-template-columns:1fr}}
+.sol{border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px;align-content:start}
+.sol .cab{display:flex;gap:12px;align-items:baseline}
+.sol .n{font-size:22px;font-weight:800;color:var(--red);font-variant-numeric:tabular-nums}
+.sol h3{margin:0;font-size:17px;font-weight:700;line-height:1.25}
+.sol p.o{font-size:14px;color:var(--muted);margin:0}
+.sol dl{margin:0;display:grid;gap:8px}
+.sol dt{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sol dd{margin:0;font-size:14px}
+.sol .ex{background:var(--card);border-radius:8px;padding:8px 10px}
+.todas{margin-top:22px;padding:16px 18px;border-left:4px solid var(--red);background:var(--card);border-radius:0 10px 10px 0;font-size:14px}
+.todas b{display:block;margin-bottom:4px}
+.fora{margin-top:14px;padding:16px 18px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.fora b{color:var(--fg)}
+.fora ul{margin:6px 0 0;padding-left:18px}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.logo img.fensg{width:auto;height:72%}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="topo">
+    <div class="logo"><img src="../upe.png" alt="UPE"><span class="sep"></span><img src="../fensg.png" alt="Faculdade de Enfermagem Nossa Senhora das Graças (FENSG)" class="fensg"><span class="sep"></span><img src="../logo.png" alt="dotLAB" class="dotl"></div>
+    <a class="voltar" href="../index.html">← Voltar à disciplina</a>
+  </div>
+
+  <p class="eyebrow">Encontro 1 · Material de apoio</p>
+  <h1>Cardápio de <em>soluções</em></h1>
+  <p class="lede">Uma solução tecnológica não precisa ser inteligência artificial. Muitas vezes, uma ferramenta simples, que faz bem uma única tarefa, já resolve o problema e ainda gera dados para sabermos se funcionou. Use este cardápio para imaginar soluções para os problemas da sua ficha.</p>
+
+  <div class="grade" id="grade"></div>
+
+  <h2>Para qualquer solução</h2>
+  <div class="todas">
+    <b>Além dos indicadores de cada tipo, toda solução pode ser avaliada por:</b>
+    usabilidade, com a System Usability Scale (SUS), um questionário de 10 itens respondido por quem usou; e qualidade, com a escala MARS, que avalia engajamento, funcionalidade, estética e qualidade da informação de aplicativos de saúde.
+  </div>
+  <div class="fora">
+    <b>Fora do escopo do protótipo da turma</b>
+    <ul>
+      <li>integração com prontuário eletrônico ou sistemas do serviço;</li>
+      <li>uso de dados reais de pacientes;</li>
+      <li>dispositivos ou sensores físicos;</li>
+      <li>soluções com várias tarefas principais ao mesmo tempo.</li>
+    </ul>
+  </div>
+
+  <footer>Ciência de Dados na Saúde · PPGEnf UPE/UEPB · dotLAB</footer>
+</div>
+<script>
+const SOLUCOES = [
+  {t:"Checklist digital", o:"Uma lista de verificação que guia uma rotina e registra o que foi feito.",
+   ex:"Checklist de passagem de plantão.", dados:"Itens marcados e pulados, tempo de preenchimento, horário.",
+   av:"Adesão (quantas vezes é usado), completude (itens marcados) e itens mais esquecidos."},
+  {t:"Calculadora ou escore", o:"Faz um cálculo a partir de respostas, com base numa escala já validada.",
+   ex:"Calcular o risco de lesão por pressão com a escala de Braden.", dados:"Respostas, resultado do cálculo e classificação.",
+   av:"Concordância com o cálculo feito à mão, erros evitados e tempo gasto."},
+  {t:"Lembrete ou alerta", o:"Avisa a pessoa certa no momento certo.",
+   ex:"Lembrete de retorno para vacina ou consulta.", dados:"Lembretes enviados, confirmados e ignorados.",
+   av:"Comparecimento antes e depois da solução e proporção de alertas ignorados."},
+  {t:"Diário de sinais e sintomas", o:"A pessoa registra, ao longo dos dias, o que sente ou mede.",
+   ex:"Registro da pressão arterial em casa.", dados:"Registros por dia, valores e regularidade.",
+   av:"Adesão (dias com registro), abandono e valores fora do alvo identificados."},
+  {t:"Jogo ou quiz educativo", o:"Ensina por meio de perguntas, desafios ou situações.",
+   ex:"O jogo Isso é normal?, do dotLAB, sobre os sinais de alerta da endometriose.", dados:"Partidas iniciadas e concluídas, respostas e acertos por pergunta.",
+   av:"Conclusão, acertos, dificuldade de cada pergunta e conhecimento antes e depois."},
+  {t:"Material educativo interativo", o:"Explica um cuidado passo a passo, com navegação simples.",
+   ex:"Guia de cuidados com o cateter para cuidadores.", dados:"Páginas vistas, tempo em cada passo e chegada ao final.",
+   av:"Alcance, conclusão e compreensão, com perguntas rápidas ao final."},
+  {t:"Formulário de triagem", o:"Faz perguntas e indica um caminho, como procurar ou não o serviço.",
+   ex:"Perguntas que indicam quando procurar a unidade de saúde.", dados:"Respostas e resultado da triagem.",
+   av:"Sensibilidade, especificidade e valores preditivos, comparando com a avaliação de profissionais."},
+  {t:"Painel de indicadores", o:"Mostra números e gráficos que ajudam a acompanhar uma situação.",
+   ex:"Painel das notificações de um agravo no município, com dados do SINAN.", dados:"Acessos, filtros usados e data da última atualização.",
+   av:"Uso pela equipe, atualidade dos dados e decisões tomadas a partir do painel."}
+];
+const g=document.getElementById("grade");
+SOLUCOES.forEach((s,i)=>{
+  const el=document.createElement("article"); el.className="sol";
+  el.innerHTML=`<div class="cab"><span class="n"></span><h3></h3></div><p class="o"></p>
+  <dl><div><dt>Exemplo</dt><dd class="ex"></dd></div><div><dt>Dados que gera</dt><dd class="da"></dd></div><div><dt>Como avaliar</dt><dd class="av"></dd></div></dl>`;
+  el.querySelector(".n").textContent=String(i+1).padStart(2,"0");
+  el.querySelector("h3").textContent=s.t;
+  el.querySelector(".o").textContent=s.o;
+  el.querySelector(".ex").textContent=s.ex;
+  el.querySelector(".da").textContent=s.dados;
+  el.querySelector(".av").textContent=s.av;
+  g.appendChild(el);
+});
+</script>
+</body></html>

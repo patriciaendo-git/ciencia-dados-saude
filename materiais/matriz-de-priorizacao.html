@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Matriz de priorização · Ciência de Dados na Saúde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#fff;--fg:#1A1718;--muted:#6A6365;--line:#E6DEDE;--card:#F6F2F2;--red:#D11615;--bar:#282425;--font:"Poppins",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme: dark){:root{--bg:#161415;--fg:#F2EDED;--muted:#A79FA1;--line:#3A3537;--card:#221F20;--red:#FF6B6A;--bar:#CFC7C8;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 16px 56px}
+.topo{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:16px;border-bottom:2px solid var(--red)}
+.logo{height:52px;padding:0 10px;background:#fff;border-radius:8px;display:flex;align-items:center;gap:8px;border:1px solid var(--line)}
+.logo img{width:64px}.logo img.dotl{width:38px}.logo .sep{width:1px;height:32px;background:#E6DEDE}
+a.voltar{font-size:13px;font-weight:600;color:var(--fg)}
+.eyebrow{margin-top:24px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+h1{font-size:clamp(26px,4.4vw,34px);font-weight:800;margin:4px 0 8px;line-height:1.2}
+h1 em{font-style:normal;color:var(--red)}
+h2{font-size:20px;font-weight:700;margin:34px 0 10px}
+.lede{color:var(--muted);max-width:72ch}
+.passos{margin:18px 0 0;padding:16px 18px 16px 38px;background:var(--card);border-left:4px solid var(--red);border-radius:0 10px 10px 0;font-size:14px}
+.passos li+li{margin-top:4px}
+.crit{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+@media (max-width:760px){.crit{grid-template-columns:1fr}}
+.crit div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--muted)}
+.crit b{display:block;color:var(--fg);font-size:14px}
+.crit div.el{border-style:dashed}
+.tab-wrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:13px}
+th,td{padding:8px 8px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+thead th{background:#282425;color:#fff;font-weight:600;font-size:12px;line-height:1.3}
+thead th.el{background:#6A6365}
+td.nome{text-align:left;min-width:280px}
+tbody tr:last-child td{border-bottom:0}
+input[type=text]{width:100%;font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
+input[type=number]{width:62px;font:inherit;font-size:13px;padding:6px;border:1px solid var(--line);border-radius:6px;text-align:center;background:var(--bg);color:var(--fg)}
+input:focus{outline:2px solid var(--red);outline-offset:1px}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--red)}
+td.tot{font-weight:800;font-variant-numeric:tabular-nums;font-size:15px}
+tr.fora td{opacity:.55}
+tr.fora td.tot{text-decoration:line-through}
+.rank{display:grid;gap:8px;margin-top:10px}
+.rk{display:grid;grid-template-columns:28px minmax(120px,260px) 1fr 54px;gap:12px;align-items:center;font-size:14px}
+.rk .p{font-weight:800;color:var(--muted);text-align:right}
+.rk.um .p{color:var(--red)}
+.rk .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk .tr{display:block;height:14px;background:var(--card);border-radius:4px;overflow:hidden}
+.rk .b{display:block;height:100%;background:var(--bar);border-radius:0 4px 4px 0}
+.rk.um .b{background:var(--red)}
+.rk.el .b{background:var(--dash,#D3C8C9)}
+.rk .v{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+.rk.el .nm{color:var(--muted);text-decoration:line-through}
+.vazio{color:var(--muted);font-size:14px}
+.empate{margin-top:12px;font-size:14px;font-weight:600;color:var(--red)}
+.acoes{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font:inherit;font-size:13px;font-weight:600;padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn.pri{background:var(--red);color:#fff;border:1px solid var(--red)}
+.btn.sec{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.msg{font-size:13px;color:var(--muted)}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+@media print{.acoes,a.voltar,.passos{display:none}}
+.logo img.fensg{width:auto;height:72%}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="topo">
+    <div class="logo"><img src="../upe.png" alt="UPE"><span class="sep"></span><img src="../fensg.png" alt="Faculdade de Enfermagem Nossa Senhora das Graças (FENSG)" class="fensg"><span class="sep"></span><img src="../logo.png" alt="dotLAB" class="dotl"></div>
+    <a class="voltar" href="../index.html">← Voltar à disciplina</a>
+  </div>
+
+  <p class="eyebrow">Encontro 4 · Material de apoio</p>
+  <h1>Matriz de <em>priorização</em></h1>
+  <p class="lede">Os problemas finalistas vieram das fichas da turma. Agora escolhemos um deles para virar o protótipo, com critérios combinados antes da votação.</p>
+
+  <ol class="passos">
+    <li>Cada estudante dá, sozinha, uma nota de 1 a 5 para cada problema em cada critério.</li>
+    <li>A professora digita aqui a média da turma em cada célula.</li>
+    <li>Problema que exige dados reais de pacientes ou integração com sistemas do serviço sai da disputa.</li>
+    <li>Vence a maior soma. Em caso de empate, as professoras decidem pela viabilidade.</li>
+  </ol>
+
+  <h2>Critérios</h2>
+  <div class="crit" id="crit"></div>
+
+  <h2>Pontuação</h2>
+  <div class="tab-wrap"><table>
+    <thead><tr id="cab"></tr></thead>
+    <tbody id="corpo"></tbody>
+  </table></div>
+
+  <h2>Resultado</h2>
+  <div class="rank" id="rank"></div>
+  <p class="empate" id="empate" hidden></p>
+
+  <div class="acoes">
+    <button class="btn sec" id="exemplo" type="button">Preencher com um exemplo</button>
+    <button class="btn sec" id="limpar" type="button">Limpar</button>
+    <button class="btn pri" id="copiar" type="button">Copiar resultado</button>
+    <span class="msg" id="msg" aria-live="polite"></span>
+  </div>
+
+  <footer>Ciência de Dados na Saúde · PPGEnf UPE/UEPB · dotLAB</footer>
+</div>
+<script>
+const CRIT = [
+  ["impacto","Impacto","Quanto a solução melhoraria a vida de quem sofre com o problema."],
+  ["freq","Frequência","Com que frequência o problema acontece."],
+  ["viab","Viabilidade","Cabe numa solução simples, construída em cerca de 5 semanas."],
+  ["medir","Dá para medir","A solução gera dados que mostram se ela funciona."],
+  ["usuario","Usuário acessível","A turma consegue representar o usuário no teste de usabilidade."]
+];
+const ELIM = [["dados","Exige dados reais de pacientes"],["integ","Exige integração com sistemas"]];
+const N = 6;
+const c=document.getElementById("crit");
+CRIT.forEach(([k,t,d])=>{const e=document.createElement("div");e.innerHTML="<b></b><span></span>";e.querySelector("b").textContent=t;e.querySelector("span").textContent=d;c.appendChild(e);});
+ELIM.forEach(([k,t])=>{const e=document.createElement("div");e.className="el";e.innerHTML="<b></b><span>Critério eliminatório: marque se o problema exige isso.</span>";e.querySelector("b").textContent=t;c.appendChild(e);});
+
+const cab=document.getElementById("cab");
+cab.innerHTML="<th>#</th><th style='text-align:left'>Problema finalista</th>"+CRIT.map(x=>`<th>${x[1]}<br><span style="font-weight:400">1 a 5</span></th>`).join("")+ELIM.map(x=>`<th class="el">${x[1]}</th>`).join("")+"<th>Soma</th>";
+const corpo=document.getElementById("corpo");
+for(let i=0;i<N;i++){
+  const tr=document.createElement("tr"); tr.dataset.i=i;
+  tr.innerHTML=`<td>${i+1}</td><td class="nome"><input type="text" aria-label="Nome do problema ${i+1}" data-k="nome"></td>`+
+    CRIT.map(([k,t])=>`<td><input type="number" min="1" max="5" step="0.1" data-k="${k}" aria-label="${t}, problema ${i+1}"></td>`).join("")+
+    ELIM.map(([k,t])=>`<td><input type="checkbox" data-k="${k}" aria-label="${t}, problema ${i+1}"></td>`).join("")+
+    `<td class="tot">—</td>`;
+  corpo.appendChild(tr);
+}
+function ler(){
+  return [...corpo.rows].map(tr=>{
+    const g=k=>tr.querySelector(`[data-k="${k}"]`);
+    const nome=g("nome").value.trim();
+    const notas=CRIT.map(([k])=>{const v=parseFloat(g(k).value);return isNaN(v)?null:Math.min(5,Math.max(1,v));});
+    const fora=ELIM.some(([k])=>g(k).checked);
+    const completo=notas.every(v=>v!==null);
+    const soma=completo?notas.reduce((a,b)=>a+b,0):null;
+    return {tr,nome,notas,fora,soma,completo,viab:notas[2]};
+  });
+}
+function atualizar(){
+  const L=ler();
+  L.forEach(r=>{r.tr.querySelector(".tot").textContent=r.soma===null?"—":r.soma.toFixed(1).replace(".",",");r.tr.classList.toggle("fora",r.fora&&!!r.nome);});
+  const val=L.filter(r=>r.nome&&r.completo);
+  const rank=document.getElementById("rank"); rank.innerHTML="";
+  const emp=document.getElementById("empate"); emp.hidden=true;
+  if(!val.length){rank.innerHTML='<p class="vazio">Digite os problemas e as notas para ver o resultado.</p>';return;}
+  const ok=val.filter(r=>!r.fora).sort((a,b)=>b.soma-a.soma||b.viab-a.viab);
+  const el=val.filter(r=>r.fora);
+  const max=5*CRIT.length;
+  [...ok,...el].forEach((r,i)=>{
+    const d=document.createElement("div");
+    d.className="rk"+(r.fora?" el":(i===0?" um":""));
+    d.innerHTML=`<span class="p"></span><span class="nm"></span><span class="tr"><span class="b"></span></span><span class="v"></span>`;
+    d.querySelector(".p").textContent=r.fora?"–":(i+1)+"º";
+    d.querySelector(".nm").textContent=r.nome+(r.fora?" (eliminado)":"");
+    d.querySelector(".b").style.width=(r.soma/max*100)+"%";
+    d.querySelector(".v").textContent=r.soma.toFixed(1).replace(".",",");
+    rank.appendChild(d);
+  });
+  if(ok.length>1&&Math.abs(ok[0].soma-ok[1].soma)<0.05){
+    emp.hidden=false;
+    emp.textContent=`Empate entre "${ok[0].nome}" e "${ok[1].nome}": as professoras decidem pela viabilidade.`;
+  }
+}
+corpo.addEventListener("input",atualizar);
+document.getElementById("limpar").addEventListener("click",()=>{corpo.querySelectorAll("input").forEach(i=>{if(i.type==="checkbox")i.checked=false;else i.value="";});atualizar();});
+document.getElementById("exemplo").addEventListener("click",()=>{
+  const EX=[["Exemplo A: esquecimento de retornos",[4.2,4.5,4.0,4.6,3.8],[0,0]],["Exemplo B: dúvidas de cuidadores na alta",[4.6,3.9,3.6,3.4,4.1],[0,0]],["Exemplo C: alerta no prontuário",[4.8,4.4,2.0,4.0,3.0],[0,1]]];
+  document.getElementById("limpar").click();
+  EX.forEach(([n,v,e],i)=>{const tr=corpo.rows[i];tr.querySelector('[data-k="nome"]').value=n;CRIT.forEach(([k],j)=>tr.querySelector(`[data-k="${k}"]`).value=v[j]);ELIM.forEach(([k],j)=>tr.querySelector(`[data-k="${k}"]`).checked=!!e[j]);});
+  atualizar();
+});
+document.getElementById("copiar").addEventListener("click",async()=>{
+  const L=ler().filter(r=>r.nome);
+  const t="Matriz de priorização\n"+L.map(r=>`${r.nome}: ${CRIT.map(([k,n],j)=>`${n} ${r.notas[j]??"—"}`).join("; ")}; soma ${r.soma??"—"}${r.fora?" (eliminado)":""}`).join("\n");
+  const m=document.getElementById("msg");
+  try{await navigator.clipboard.writeText(t);m.textContent="Resultado copiado.";}catch(e){m.textContent="Não foi possível copiar.";}
+});
+atualizar();
+</script>
+</body></html>

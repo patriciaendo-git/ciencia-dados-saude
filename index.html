@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ciência de Dados na Saúde · PPGEnf · dotLAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --fg:#1A1718; --muted:#6A6365; --line:#E6DEDE; --card:#F6F2F2;
+  --red:#D11615; --redText:#D11615; --dash:#D3C8C9; --wait:#6A6365; --waitBg:#EFEAEA;
+  --font:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#161415; --fg:#F2EDED; --muted:#A79FA1; --line:#3A3537; --card:#221F20;
+  --red:#FF6B6A; --redText:#FF6B6A; --dash:#4A4446; --wait:#A79FA1; --waitBg:#2A2627; color-scheme:dark}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.6;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:960px;margin:0 auto;padding-block:32px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.2}
+p{margin:0}
+header.top{display:flex;gap:20px;align-items:center;padding-bottom:28px;border-bottom:2px solid var(--red)}
+.logo{flex:none;height:76px;padding:0 12px;background:#fff;border-radius:10px;display:flex;align-items:center;gap:10px;border:1px solid var(--line)}
+.logo .sep{width:1px;height:46px;background:#E6DEDE}.logo img.dotl{width:56px}
+.logo img{width:92px;height:auto}
+.top .txt{min-width:0;display:grid;gap:4px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--redText)}
+h1{font-size:clamp(26px,4.6vw,38px);font-weight:800;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--redText)}
+.lede{color:var(--muted);max-width:62ch}
+.lede.prof{font-size:16px;font-weight:600;color:var(--fg)}
+section{margin-top:44px}
+h2{font-size:22px;font-weight:700;margin-bottom:6px}
+.sub{color:var(--muted);margin-bottom:18px;max-width:70ch}
+/* fio condutor */
+.fio{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:f}
+.fio li{position:relative;border:1px solid var(--line);border-radius:12px;padding:14px 14px 14px;font-size:13px;line-height:1.45;color:var(--muted);counter-increment:f}
+.fio li b{display:block;color:var(--fg);font-size:14px;font-weight:700;margin-bottom:2px}
+.fio li::before{content:counter(f);display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:12px;margin-bottom:8px}
+.fio li.ia{background:var(--card);border-color:transparent}
+@media (max-width:760px){.fio{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.fio{grid-template-columns:1fr}}
+.perguntas{margin-top:18px;padding:16px 18px;border-left:4px solid var(--red);background:var(--card);border-radius:0 10px 10px 0}
+.perguntas p.t{font-weight:700;margin-bottom:8px}
+.perguntas ol{margin:0;padding-left:20px;display:grid;gap:2px}
+/* encontros */
+.grupos{display:grid;gap:36px}
+.gh{display:grid;gap:2px;margin-bottom:12px;padding-left:12px;border-left:3px solid var(--red)}
+.gh h3{font-size:17px;font-weight:700}
+.gh p{font-size:14px;color:var(--muted)}
+.aulas{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.aula{display:grid;grid-template-columns:52px 1fr;gap:6px 18px;padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.aula.on{background:var(--card);border-color:transparent}
+.aula .num{font-size:22px;font-weight:800;color:var(--redText);font-variant-numeric:tabular-nums}
+.aula .body{min-width:0;display:grid;gap:4px}
+.aula h3{font-size:16px;font-weight:700}
+.aula .body > p{font-size:14px;color:var(--muted)}
+.aula .entrega{font-size:12px;font-weight:700;color:var(--redText)}
+.mats{grid-column:2/-1;list-style:none;margin:8px 0 0;padding:10px 0 0;border-top:1px dashed var(--dash);display:grid;gap:8px}
+.mat{display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap}
+.mb{display:flex;gap:10px;align-items:baseline;min-width:0;flex:1 1 240px}
+.mb .tag{flex:none;width:170px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mb .ad{font-size:13px;color:var(--fg)}
+.act{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.meta2{font-size:12px;color:var(--muted);white-space:nowrap}
+.st{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap;background:var(--waitBg);color:var(--wait)}
+.btn{font:inherit;font-size:12px;font-weight:600;padding:5px 11px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn.pri{background:var(--red);color:#fff;border:1px solid var(--red)}
+.btn.sec{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+/* apoio e entregas */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (max-width:620px){.cards{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:8px;align-content:start}
+.card h3{font-size:16px;font-weight:700}
+.card p{font-size:14px;color:var(--muted)}
+.card .quando{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--redText)}
+.card .act{margin-top:4px}
+.entregas{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.entregas li{display:grid;grid-template-columns:64px 1fr;gap:4px 16px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.entregas .peso{font-size:24px;font-weight:800;color:var(--redText);font-variant-numeric:tabular-nums;line-height:1.1}
+.entregas b{display:block;font-size:15px}
+.entregas span{font-size:14px;color:var(--muted)}
+.prot{border:1px dashed var(--dash);border-radius:12px;padding:18px;display:grid;gap:6px}
+.prot p{font-size:14px;color:var(--muted)}
+.note{margin-top:14px;font-size:13px;color:var(--muted)}
+.aviso{margin-top:28px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;font-size:13px;line-height:1.55;color:var(--muted)}
+.aviso b{color:var(--fg)}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted)}
+@media (max-width:620px){
+  header.top{flex-direction:column;align-items:flex-start;gap:16px}
+  .logo{height:60px}.logo img{width:72px}.logo img.dotl{width:44px}
+  .aula{grid-template-columns:40px 1fr}
+  .mats{grid-column:1/-1}
+  .mb .tag{width:auto}
+}
+.logo img.fensg{width:auto;height:72%}
+</style></head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo"><img src="upe.png" alt="Universidade de Pernambuco (UPE)"><span class="sep"></span><img src="fensg.png" alt="Faculdade de Enfermagem Nossa Senhora das Graças (FENSG)" class="fensg"><span class="sep"></span><img src="logo.png" alt="dotLAB" class="dotl"></div>
+    <div class="txt">
+      <p class="eyebrow">PPGEnf UPE/UEPB · Mestrado e doutorado · 45 h</p>
+      <h1>Ciência de Dados na <em>Saúde</em></h1>
+      <p class="lede prof">Profa. Patricia Takako Endo e Profa. Danielle Moura</p>
+    </div>
+  </header>
+
+  <section aria-labelledby="disc">
+    <h2 id="disc">A disciplina</h2>
+    <p class="sub">Vamos treinar o olhar analítico: partir de um problema de saúde, pensar numa solução tecnológica e usar a ciência de dados para avaliar se ela funciona. Durante a disciplina, a turma escolhe um problema e as professoras constroem um protótipo a partir dele, para que vocês avaliem uma aplicação real.</p>
+    <ol class="fio">
+      <li><b>Problema</b>um problema da prática, com evidência</li>
+      <li><b>Solução</b>uma solução tecnológica, que não precisa ser IA</li>
+      <li><b>Dados</b>o que a solução registra quando é usada</li>
+      <li><b>Avaliação</b>uso, desempenho, qualidade e usabilidade</li>
+      <li class="ia"><b>Modelo</b>que modelo os dados permitem criar</li>
+    </ol>
+    <div class="perguntas">
+      <p class="t">As quatro perguntas de todo encontro</p>
+      <ol>
+        <li>Qual é o problema?</li>
+        <li>Que solução responde a ele?</li>
+        <li>Como saber se a solução funciona?</li>
+        <li>Que dado mostra isso?</li>
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="enc">
+    <h2 id="enc">Encontros</h2>
+    <p class="sub">Os materiais aparecem aqui à medida que forem publicados.</p>
+    <div class="grupos" id="lista"></div>
+    <p class="note">As práticas usam dados públicos do SUS e bases de treino simuladas, com ferramentas que não exigem programação: planilha, TabNet, Orange Data Mining, JASP e Looker Studio.</p>
+  </section>
+
+  <section aria-labelledby="apoio">
+    <h2 id="apoio">Materiais de apoio</h2>
+    <p class="sub">Para levantar e escolher o problema que vira o protótipo da turma.</p>
+    <div class="cards">
+      <div class="card"><p class="quando">Encontros 1 a 3</p><h3>Ficha do problema</h3><p>Registre de 2 a 3 problemas da sua prática: quem sofre, o que se faz hoje e que dado mostraria o problema.</p><div class="act"><a class="btn pri" href="materiais/ficha-do-problema.html">Abrir ↗</a></div></div>
+      <div class="card"><p class="quando">Encontro 1</p><h3>Cardápio de soluções</h3><p>Tipos de solução tecnológica que não são IA, com exemplos, os dados que cada uma gera e como avaliá-la.</p><div class="act"><a class="btn pri" href="materiais/cardapio-de-solucoes.html">Abrir ↗</a></div></div>
+      <div class="card"><p class="quando">Encontro 4</p><h3>Matriz de priorização</h3><p>Pontue os problemas finalistas pelos critérios combinados e veja qual deles fica em primeiro.</p><div class="act"><a class="btn pri" href="materiais/matriz-de-priorizacao.html">Abrir ↗</a></div></div>
+      <div class="card"><p class="quando">Modelo de relatório</p><h3>Relatório da base de treino · Isso é normal?</h3><p>A avaliação de um jogo educativo do dotLAB com os dados de uso. É o modelo do relatório final.</p><div class="act"><a class="btn sec" target="_blank" rel="noopener" href="https://patriciaendo-git.github.io/trilha-educativa/relatorio-base-de-treino.html">Abrir ↗</a></div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="prot">
+    <h2 id="prot">O protótipo da turma</h2>
+    <div class="prot" id="prototipo">
+      <p><b>Problema:</b> será escolhido no encontro 4.</p>
+      <p>Depois da escolha, esta seção traz a ficha do protótipo, o link para usá-lo e os indicadores de sucesso definidos pela turma.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="ent">
+    <h2 id="ent">Entregas</h2>
+    <p class="sub">As três entregas são sobre a mesma solução. Cada uma é corrigida por rubrica, com devolutiva ao longo da disciplina.</p>
+    <ul class="entregas">
+      <li><span class="peso">20%</span><div><b>Plano de avaliação da solução</b><span>Problema, solução proposta, usuários e indicadores de sucesso. Entrega no encontro 5.</span></div></li>
+      <li><span class="peso">20%</span><div><b>Avaliação do protótipo</b><span>Usabilidade (System Usability Scale) e qualidade (MARS), com comparação a uma solução já existente. Entrega no encontro 13.</span></div></li>
+      <li><span class="peso">60%</span><div><b>Relatório de avaliação com dados</b><span>Em grupo, no Looker Studio, no modelo do relatório do Isso é normal?. Termina com uma proposta curta de estudo com usuários reais e do modelo que os dados permitiriam criar. Apresentação no encontro 15.</span></div></li>
+    </ul>
+    <p class="aviso"><b>Sobre estes materiais.</b> Os materiais desta disciplina foram preparados pelas professoras com o apoio do Claude, assistente de inteligência artificial da Anthropic.</p>
+  </section>
+
+  <footer><span>dotLAB · Grupo de Pesquisa em Transformação Digital · UPE</span><span>dotlabbrazil.com.br</span></footer>
+</div>
+
+<script>
+/* Para publicar um material, preencha dentro do encontro:
+   slides / apostila: {arq:"encontros/<pasta>/<arquivo>.pdf", pag:14, ver:"Versão 1.0 · mês de ano"}
+   material (página interativa): {pagina:"encontros/<pasta>/index.html", ver:"Versão 1.0 · mês de ano"}
+   apoio: lista de {t:"Nome", href:"materiais/arquivo.html"} usados no encontro.
+   Material sem arquivo aparece como "Em preparação". Use null para "não se aplica". */
+const ENCONTROS = [
+  {n:"01", t:"Ciência de dados na saúde e pensamento analítico", d:"As quatro perguntas; soluções tecnológicas do dotLAB e o relatório modelo. Início do levantamento de problemas.", slides:{}, material:null, apostila:null, apoio:[{t:"Cardápio de soluções",href:"materiais/cardapio-de-solucoes.html"},{t:"Ficha do problema",href:"materiais/ficha-do-problema.html"}]},
+  {n:"02", t:"Fontes e coleta de dados", d:"Sistemas de informação do SUS e registro de enfermagem. Prática no TabNet e no OpenDataSUS: qual é o tamanho do seu problema?", slides:{}, material:null, apostila:null, apoio:[]},
+  {n:"03", t:"Organização dos dados e pergunta de dados", d:"Tabelas, dicionário de dados e os dados que uma solução gera; da pergunta clínica à pergunta de dados (CRISP-DM).", slides:{}, material:null, apostila:null, apoio:[{t:"Ficha do problema",href:"materiais/ficha-do-problema.html"}], entrega:"Entrega da ficha do problema revisada"},
+  {n:"04", t:"Do problema à solução tecnológica", d:"Problemas finalistas, matriz de priorização, enunciado do problema, ideias de solução, personas e indicadores de sucesso.", slides:{}, material:null, apostila:null, apoio:[{t:"Matriz de priorização",href:"materiais/matriz-de-priorizacao.html"},{t:"Cardápio de soluções",href:"materiais/cardapio-de-solucoes.html"}]},
+  {n:"05", t:"Limpeza e qualidade dos dados", d:"Ausentes, duplicados, inconsistências e valores extremos, com a base do Isso é normal? no Orange Data Mining.", slides:{}, material:null, apostila:null, apoio:[], entrega:"Entrega do plano de avaliação da solução"},
+  {n:"06", t:"Estatística descritiva e inferencial", d:"Medidas, distribuições, incerteza e tamanho de efeito.", slides:{}, material:null, apostila:null, apoio:[]},
+  {n:"07", t:"Como avaliar uma solução tecnológica", d:"Indicadores de uso, desempenho (sensibilidade, especificidade e valores preditivos), qualidade e usabilidade; desenho da avaliação.", slides:{}, material:null, apostila:null, apoio:[]},
+  {n:"08", t:"Estudo de caso: a avaliação do Isso é normal?", d:"Uma avaliação completa com dados, do começo ao fim. Avaliação intermediária da disciplina.", slides:{}, material:null, apostila:null, apoio:[]},
+  {n:"09", t:"Protótipo v1", d:"A turma valida o conteúdo e os requisitos do protótipo. Os grupos recebem a base simulada do protótipo.", slides:{}, material:null, apostila:null, apoio:[]},
+  {n:"10", t:"Visualização de dados", d:"Escolher o gráfico certo e reconhecer gráficos enganosos.", slides:{}, material:null, apostila:null, apoio:[]},
+  {n:"11", t:"Dashboards", d:"Painel de acompanhamento do protótipo no Looker Studio.", slides:{}, material:null, apostila:null, apoio:[]},
+  {n:"12", t:"Interpretação, decisão e ética", d:"Manter, ajustar ou descontinuar a solução; limites; LGPD, viés nos dados e equidade.", slides:{}, material:null, apostila:null, apoio:[]},
+  {n:"13", t:"Usabilidade e qualidade do protótipo", d:"Teste com a System Usability Scale e avaliação com a escala MARS.", slides:{}, material:null, apostila:null, apoio:[], entrega:"Entrega da avaliação do protótipo"},
+  {n:"14", t:"Dos dados ao modelo", d:"Que modelos de aprendizado de máquina e IA os dados da solução permitem criar e o que eles exigem; demonstração no Orange.", slides:{}, material:null, apostila:null, apoio:[]},
+  {n:"15", t:"Apresentações e versão final do protótipo", d:"Relatórios e propostas de estudo; avaliação final da disciplina.", slides:null, material:null, apostila:null, apoio:[], entrega:"Apresentação do relatório de avaliação"}
+];
+const GRUPOS = [
+  {t:"Dados e pensamento analítico", d:"De onde vêm os dados em saúde e como transformar um problema em pergunta.", ns:["01","02","03"]},
+  {t:"Do problema à solução", d:"A turma escolhe o problema e define como a solução será avaliada.", ns:["04"]},
+  {t:"Analisar e avaliar", d:"As análises com a base do Isso é normal?, que servem de treino para o protótipo da turma.", ns:["05","06","07","08"]},
+  {t:"O protótipo da turma", d:"Validar, acompanhar e avaliar a solução construída a partir do problema escolhido.", ns:["09","10","11","12","13"]},
+  {t:"Dos dados ao modelo", d:"O olhar para a inteligência artificial e o fechamento.", ns:["14","15"]}
+];
+const TIPOS = [["slides","Slides"],["material","Página interativa"],["apostila","Material de estudo"]];
+
+function preencher(box, m, tipo){
+  const v=(m.ver||"").match(/Versão\s*([\d.]+)/);
+  if(m.pagina){
+    box.innerHTML=`<span class="meta2"></span><a class="btn pri">Abrir ↗</a>`;
+    box.querySelector(".meta2").textContent="Página interativa"+(v?` · versão ${v[1]}`:"");
+    box.querySelector("a").href=m.pagina; return true;
+  }
+  if(m.arq){
+    box.innerHTML=`<span class="meta2"></span><a class="btn sec" target="_blank" rel="noopener">Abrir ↗</a>`;
+    box.querySelector(".meta2").textContent=`PDF · ${m.pag} ${tipo==="slides"?"slides":"páginas"}`+(v?` · versão ${v[1]}`:"");
+    box.querySelector("a").href=m.arq; return true;
+  }
+  box.innerHTML=`<span class="st">Em preparação</span>`; return false;
+}
+
+const lista=document.getElementById("lista");
+GRUPOS.forEach(gr=>{
+  const sec=document.createElement("div");
+  sec.innerHTML=`<div class="gh"><h3></h3><p></p></div><ul class="aulas"></ul>`;
+  sec.querySelector("h3").textContent=gr.t; sec.querySelector(".gh p").textContent=gr.d;
+  lista.appendChild(sec);
+  const ul=sec.querySelector("ul");
+  gr.ns.map(n=>ENCONTROS.find(a=>a.n===n)).forEach(a=>{
+    const li=document.createElement("li"); li.className="aula";
+    li.innerHTML=`<div class="num"></div><div class="body"><h3></h3><p></p></div><ul class="mats"></ul>`;
+    li.querySelector(".num").textContent=a.n;
+    li.querySelector("h3").textContent=a.t;
+    li.querySelector(".body p").textContent=a.d;
+    if(a.entrega){const e=document.createElement("p");e.className="entrega";e.textContent=a.entrega;li.querySelector(".body").appendChild(e);}
+    const mats=li.querySelector(".mats"); let algum=false;
+    TIPOS.forEach(([k,nome])=>{
+      if(!a[k]) return;
+      const r=document.createElement("li"); r.className="mat";
+      r.innerHTML=`<div class="mb"><span class="tag"></span></div><div class="act"></div>`;
+      r.querySelector(".tag").textContent=nome;
+      if(preencher(r.querySelector(".act"), a[k], k)) algum=true;
+      mats.appendChild(r);
+    });
+    (a.apoio||[]).forEach(ap=>{
+      const r=document.createElement("li"); r.className="mat";
+      r.innerHTML=`<div class="mb"><span class="tag">Material de apoio</span><span class="ad"></span></div><div class="act"><a class="btn pri">Abrir ↗</a></div>`;
+      r.querySelector(".ad").textContent=ap.t; r.querySelector("a").href=ap.href;
+      mats.appendChild(r); algum=true;
+    });
+    if(!mats.children.length) mats.remove();
+    if(algum) li.classList.add("on");
+    ul.appendChild(li);
+  });
+});
+</script>
+</body></html>
