@@ -40,9 +40,6 @@ h2{font-size:22px;font-weight:700;margin-bottom:6px}
 .fio li.ia{background:var(--card);border-color:transparent}
 @media (max-width:760px){.fio{grid-template-columns:1fr 1fr}}
 @media (max-width:460px){.fio{grid-template-columns:1fr}}
-.perguntas{margin-top:18px;padding:16px 18px;border-left:4px solid var(--red);background:var(--card);border-radius:0 10px 10px 0}
-.perguntas p.t{font-weight:700;margin-bottom:8px}
-.perguntas ol{margin:0;padding-left:20px;display:grid;gap:2px}
 /* encontros */
 .grupos{display:grid;gap:36px}
 .gh{display:grid;gap:2px;margin-bottom:12px;padding-left:12px;border-left:3px solid var(--red)}
@@ -117,15 +114,6 @@ footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);display
       <li><b>Avaliação</b>uso, desempenho, qualidade e usabilidade</li>
       <li class="ia"><b>Modelo</b>que modelo os dados permitem criar</li>
     </ol>
-    <div class="perguntas">
-      <p class="t">As quatro perguntas de todo encontro</p>
-      <ol>
-        <li>Qual é o problema?</li>
-        <li>Que solução responde a ele?</li>
-        <li>Como saber se a solução funciona?</li>
-        <li>Que dado mostra isso?</li>
-      </ol>
-    </div>
   </section>
 
   <section aria-labelledby="enc">
@@ -133,17 +121,6 @@ footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);display
     <p class="sub">Os materiais aparecem aqui à medida que forem publicados.</p>
     <div class="grupos" id="lista"></div>
     <p class="note">As práticas usam dados públicos do SUS e bases de treino simuladas, com ferramentas que não exigem programação: planilha, TabNet, Orange Data Mining, JASP e Looker Studio.</p>
-  </section>
-
-  <section aria-labelledby="apoio">
-    <h2 id="apoio">Materiais de apoio</h2>
-    <p class="sub">Para levantar e escolher o problema que vira o protótipo da turma.</p>
-    <div class="cards">
-      <div class="card"><p class="quando">Encontros 1 a 3</p><h3>Ficha do problema</h3><p>Registre de 2 a 3 problemas da sua prática: quem sofre, o que se faz hoje e que dado mostraria o problema.</p><div class="act"><a class="btn pri" href="materiais/ficha-do-problema.html">Abrir ↗</a></div></div>
-      <div class="card"><p class="quando">Encontro 1</p><h3>Cardápio de soluções</h3><p>Tipos de solução tecnológica que não são IA, com exemplos, os dados que cada uma gera e como avaliá-la.</p><div class="act"><a class="btn pri" href="materiais/cardapio-de-solucoes.html">Abrir ↗</a></div></div>
-      <div class="card"><p class="quando">Encontro 4</p><h3>Matriz de priorização</h3><p>Pontue os problemas finalistas pelos critérios combinados e veja qual deles fica em primeiro.</p><div class="act"><a class="btn pri" href="materiais/matriz-de-priorizacao.html">Abrir ↗</a></div></div>
-      <div class="card"><p class="quando">Modelo de relatório</p><h3>Relatório da base de treino · Isso é normal?</h3><p>A avaliação de um jogo educativo do dotLAB com os dados de uso. É o modelo do relatório final.</p><div class="act"><a class="btn sec" target="_blank" rel="noopener" href="https://patriciaendo-git.github.io/trilha-educativa/relatorio-base-de-treino.html">Abrir ↗</a></div></div>
-    </div>
   </section>
 
   <section aria-labelledby="prot">
@@ -175,14 +152,14 @@ footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);display
    apoio: lista de {t:"Nome", href:"materiais/arquivo.html"} usados no encontro.
    Material sem arquivo aparece como "Em preparação". Use null para "não se aplica". */
 const ENCONTROS = [
-  {n:"01", t:"Ciência de dados na saúde e pensamento analítico", d:"As quatro perguntas; soluções tecnológicas do dotLAB e o relatório modelo. Início do levantamento de problemas.", slides:{}, material:null, apostila:null, apoio:[{t:"Cardápio de soluções",href:"materiais/cardapio-de-solucoes.html"},{t:"Ficha do problema",href:"materiais/ficha-do-problema.html"}]},
+  {n:"01", t:"Ciência de dados na saúde e pensamento analítico", d:"Do problema à avaliação: soluções tecnológicas do dotLAB e o relatório modelo. Início do levantamento de problemas.", slides:{}, material:null, apostila:null, apoio:[{t:"Cardápio de soluções",href:"materiais/cardapio-de-solucoes.html"},{t:"Ficha do problema",q:"usada até o encontro 3",href:"materiais/ficha-do-problema.html"}]},
   {n:"02", t:"Fontes e coleta de dados", d:"Sistemas de informação do SUS e registro de enfermagem. Prática no TabNet e no OpenDataSUS: qual é o tamanho do seu problema?", slides:{}, material:null, apostila:null, apoio:[]},
-  {n:"03", t:"Organização dos dados e pergunta de dados", d:"Tabelas, dicionário de dados e os dados que uma solução gera; da pergunta clínica à pergunta de dados (CRISP-DM).", slides:{}, material:null, apostila:null, apoio:[{t:"Ficha do problema",href:"materiais/ficha-do-problema.html"}], entrega:"Entrega da ficha do problema revisada"},
-  {n:"04", t:"Do problema à solução tecnológica", d:"Problemas finalistas, matriz de priorização, enunciado do problema, ideias de solução, personas e indicadores de sucesso.", slides:{}, material:null, apostila:null, apoio:[{t:"Matriz de priorização",href:"materiais/matriz-de-priorizacao.html"},{t:"Cardápio de soluções",href:"materiais/cardapio-de-solucoes.html"}]},
+  {n:"03", t:"Organização dos dados e pergunta de dados", d:"Tabelas, dicionário de dados e os dados que uma solução gera; da pergunta clínica à pergunta de dados (CRISP-DM).", slides:{}, material:null, apostila:null, apoio:[], entrega:"Entrega da ficha do problema revisada"},
+  {n:"04", t:"Do problema à solução tecnológica", d:"Problemas finalistas, matriz de priorização, enunciado do problema, ideias de solução, personas e indicadores de sucesso.", slides:{}, material:null, apostila:null, apoio:[{t:"Matriz de priorização",href:"materiais/matriz-de-priorizacao.html"}]},
   {n:"05", t:"Limpeza e qualidade dos dados", d:"Ausentes, duplicados, inconsistências e valores extremos, com a base do Isso é normal? no Orange Data Mining.", slides:{}, material:null, apostila:null, apoio:[], entrega:"Entrega do plano de avaliação da solução"},
   {n:"06", t:"Estatística descritiva e inferencial", d:"Medidas, distribuições, incerteza e tamanho de efeito.", slides:{}, material:null, apostila:null, apoio:[]},
   {n:"07", t:"Como avaliar uma solução tecnológica", d:"Indicadores de uso, desempenho (sensibilidade, especificidade e valores preditivos), qualidade e usabilidade; desenho da avaliação.", slides:{}, material:null, apostila:null, apoio:[]},
-  {n:"08", t:"Estudo de caso: a avaliação do Isso é normal?", d:"Uma avaliação completa com dados, do começo ao fim. Avaliação intermediária da disciplina.", slides:{}, material:null, apostila:null, apoio:[]},
+  {n:"08", t:"Estudo de caso: a avaliação do Isso é normal?", d:"Uma avaliação completa com dados, do começo ao fim. Avaliação intermediária da disciplina.", slides:{}, material:null, apostila:null, apoio:[{t:"Relatório da base de treino · Isso é normal?",q:"modelo do relatório final",href:"https://patriciaendo-git.github.io/trilha-educativa/relatorio-base-de-treino.html",ext:true}]},
   {n:"09", t:"Protótipo v1", d:"A turma valida o conteúdo e os requisitos do protótipo. Os grupos recebem a base simulada do protótipo.", slides:{}, material:null, apostila:null, apoio:[]},
   {n:"10", t:"Visualização de dados", d:"Escolher o gráfico certo e reconhecer gráficos enganosos.", slides:{}, material:null, apostila:null, apoio:[]},
   {n:"11", t:"Dashboards", d:"Painel de acompanhamento do protótipo no Looker Studio.", slides:{}, material:null, apostila:null, apoio:[]},
@@ -241,7 +218,7 @@ GRUPOS.forEach(gr=>{
     (a.apoio||[]).forEach(ap=>{
       const r=document.createElement("li"); r.className="mat";
       r.innerHTML=`<div class="mb"><span class="tag">Material de apoio</span><span class="ad"></span></div><div class="act"><a class="btn pri">Abrir ↗</a></div>`;
-      r.querySelector(".ad").textContent=ap.t; r.querySelector("a").href=ap.href;
+      r.querySelector(".ad").textContent=ap.t+(ap.q?` · ${ap.q}`:""); const lk=r.querySelector("a"); lk.href=ap.href; if(ap.ext){lk.className="btn sec";lk.target="_blank";lk.rel="noopener";}
       mats.appendChild(r); algum=true;
     });
     if(!mats.children.length) mats.remove();

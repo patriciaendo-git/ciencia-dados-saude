@@ -4,7 +4,7 @@ Site da disciplina Ciência de Dados na Saúde (mestrado e doutorado, 45 h), da 
 
 ## Estrutura
 
-- `index.html` · página da disciplina: fio condutor, encontros, materiais de apoio, protótipo da turma e entregas
+- `index.html` · página da disciplina: fio condutor, encontros (com os materiais de apoio de cada um), protótipo da turma e entregas
 - `materiais/ficha-do-problema.html` · ficha para levantar problemas (encontros 1 a 3)
 - `materiais/cardapio-de-solucoes.html` · tipos de solução tecnológica que não são IA (encontro 1)
 - `materiais/matriz-de-priorizacao.html` · matriz interativa para escolher o problema (encontro 4)
